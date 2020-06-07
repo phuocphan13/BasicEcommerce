@@ -1,0 +1,57 @@
+﻿@page
+@model Ecommerce.Web.Areas.Identity.Pages.Product.IndexModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="Products[0].Name"></label>
+            </th>
+            <th>
+                <label asp-for="Products[0].BrandName"></label>
+            </th>
+            <th>
+                <label asp-for="Products[0].Price"></label>
+            </th>
+            <th>
+                <label asp-for="Products[0].Amount"></label>
+            </th>
+            <th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-area="Identity" asp-page="/Product/Detail" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

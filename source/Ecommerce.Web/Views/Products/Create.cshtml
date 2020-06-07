@@ -1,0 +1,72 @@
+﻿@model Ecommerce.Model.Product.ProductCreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    var brands = (List<Ecommerce.Model.Brand.BrandSelectionViewModel>)ViewData["ABC"];
+    var selectListItem = new List<SelectListItem>() {
+        new SelectListItem()
+        {
+            Text = brands[0].BrandName,
+            Value = brands[0].Id.ToString()
+        },
+        new SelectListItem()
+        {
+            Text = brands[1].BrandName,
+            Value = brands[1].Id.ToString()
+        }
+    };
+    var product = new Ecommerce.Model.Product.ProductCreateModel();
+}
+
+<h1>Create</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="product" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label">Brand Name</label>
+                @*<select asp-for="Id" class="form-control">
+                        <option>None Selected</option>
+                        @foreach (var brand in brands)
+                        {
+                            <option onclick="@{
+                                product.BrandId = brand.Id;
+                            } ">
+                            @brand.BrandName</option>
+                        }
+                    </select>*@
+                @*@Html.DropDownList("Brands", new SelectList(brands, "Id", "BrandName"), "None Selected",
+                    new { @class = "form-control" })*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
